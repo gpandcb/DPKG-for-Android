@@ -46,7 +46,8 @@
 #include "main.h"
 
 static struct pkginfo *progress_bytrigproc;
-static struct pkg_queue queue = PKG_QUEUE_INIT;
+//static struct pkg_queue queue = PKG_QUEUE_INIT;
+static struct pkg_queue queue;
 
 int sincenothing = 0, dependtry = 0;
 

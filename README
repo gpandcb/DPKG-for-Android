@@ -1,112 +1,18 @@
-dpkg - Debian's package maintenance system
+DPKG for Android
+For the DPKG README see README.dpkg
 
-The primary interface for the dpkg suite is the ‘dselect’ program;
-a more low-level and less user-friendly interface is available in
-the form of the ‘dpkg’ command.
+Notes for compiling:
 
+The Android NDK is lacking a number of header files which need to be placed in the $ANDROID_ROOT/platforms/android-3/arch-arm/usr/include/ folder before this will compile. These header files can taken from any 32-bit linux installation. This includes (with the above path prefix):
+/sys/termios.h
+/sys/fcntl.h
+/sys/poll.h
+/sys/types.h
 
-Releases
---------
+I may have forgotten some, but they are easy to track down (look for unindentified structs), look them up and drop me a message so I can adjust this README.
 
-The current legacy, stable and development releases can be found at:
+Instructions for compiling:
+Modify the android_configure file to point to your Android NDK installation.
+Configure the installation by running ./android_configure
+Finally start the build as normal by running make
 
-  <http://ftp.debian.org/debian/pool/main/d/dpkg/>
-
-For older releases check:
-
-  <http://snapshot.debian.org/package/dpkg/>
-
-
-Mailing List
-------------
-
-The subscription interface and web archives can be found at:
-
-  <http://lists.debian.org/debian-dpkg/>
-
-The mailing list address is (no subscription required to post):
-
-  debian-dpkg@lists.debian.org
-
-
-Source Repository
------------------
-
-  <http://anonscm.debian.org/gitweb/?p=dpkg/dpkg.git>
-  <git://anonscm.debian.org/dpkg/dpkg.git>
-
-
-Building from git source
-------------------------
-
-To prepare the dpkg source tree from git before starting the build process
-some required software needs to be installed:
-
-  GNU autoconf >= 2.60
-  GNU automake >= 1.8
-  GNU gettext >= 0.18 (or just autopoint if using --disable-nls)
-  flex
-
-After installing the needed software, and running the following command on
-the git tree:
-
-  $ autoreconf -f -i
-
-the source should be roughly equivalent to the distributed tar source.
-
-
-Building from tar source
-------------------------
-
-The minimum software required to configure and build dpkg from a tarball is:
-
-  C89 compiler with few C99 extensions (see doc/coding-style.txt)
-  GNU make
-  pkg-config
-  perl
-
-To enable optional functionality or programs, this software might be needed:
-
-  zlib (used instead of gzip command-line tool)
-  xz's liblzma (used instead of xz command-line tool)
-  libbzip2 (used instead of bzip2 command-line tool)
-  libselinux
-  curses compatible library (needed on --with-dselect)
-
-To run the test suite («make check»):
-
-  TimeDate perl module
-  IO-String perl module
-
-To enable additional developer's documentation («make doc») this software
-will be needed:
-
-  pod2man
-  doxygen
-  dot
-
-To enable translated documentation this software will be needed:
-
-  po4a >= 0.36.4 (>= 0.41 for VPATH builds)
-
-To enable code coverage («./configure --enable-coverage; make coverage»)
-this software is needed:
-
-  lcov (from the Linux Test Project)
-  Devel-Cover perl module
-
-The build process is done by running the usual «./configure; make». To
-see all available configuration options please run «./configure --help».
-The following configure options might be of interest to disable specific
-programs:
-
-  --without-dselect
-  --without-start-stop-daemon
-  --without-update-alternatives
-  --without-install-info
-
-And the following to disable modifications to the build flags:
-
-  --disable-compiler-warnings
-  --disable-compiler-optimisations
-  --disable-linker-optimisations

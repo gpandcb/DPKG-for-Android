@@ -87,7 +87,7 @@
 
 /*========== Deferred trigger queue. ==========*/
 
-static struct pkg_queue deferred = PKG_QUEUE_INIT;
+static struct pkg_queue deferred;
 
 static void
 trigproc_enqueue_deferred(struct pkginfo *pend)
